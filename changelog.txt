@@ -1,0 +1,13 @@
+0.6.0 - August 01, 2016
+Updated reminder form to use boostrap
+
+0.5.0 - Juy 25, 2016
+Implemented datepicker for date fields on Reminder
+Added css classes to form groups to better address styling
+Changed date field types from text to date
+
+0.4.9
+1. change form class to wbs-contact-form
+2. changed all class names to start with wbs-contact
+3. added class for each row
+4. added placeholders for input fields

@@ -1,0 +1,59 @@
+/*
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: #23936f;
+    border: 1px solid #d3d3d3;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+.ui-state-highlight{
+	 background: #51B7AC !important;
+    
+}
+
+div[id*="-exp-group"]{
+	width: 50%;
+	display: inline;
+	 padding: 0.625em 0.4375em;
+	 float: left;
+}
+
+
+
+#gid-reminder-form input[type], textarea {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border: 1px solid #d1d1d1;
+    border-radius: 2px;
+    color: #686868;
+    padding: 0.625em 0.4375em;
+    width: 100%;
+}
+
+#gid-reminder-form input[type]:focus, textarea:focus {
+	background: #ffffff none repeat scroll 0 0;
+	border:1px solid #23936f;
+	    outline-offset: -2px;
+	
+}*/
+
+#gid-reminder-form input[type], #gid-reminder-form textarea  {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  /*border: 1px solid #23936f;*/
+}
+ 
+#gid-reminder-form input[type]:focus, #gid-reminder-form textarea:focus {
+  box-shadow: 0 0 5px rgba(35, 147, 111, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(35, 147, 111, 1);
+}
+
+#gid-reminder-form .form-group{
+	margin-bottom: 1.0em;
+}
