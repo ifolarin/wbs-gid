@@ -117,7 +117,6 @@ function build_reminder_form($atts, $form_data, $errors=array()){
 	$output .= render_messages($errors, $atts);
 	$form_action = get_permalink();
 	$output .= <<< RENDERFORM
-		<h3> {$atts['label_submit']} </h3>
 		<form id='gid-reminder-form'  name='gid-reminder-form' method='post' action="{$form_action}">
 			<fieldset>
 				<h3>{$atts['vehicle_section_title']}</h3>

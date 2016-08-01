@@ -1,10 +1,9 @@
 <?php
 error_reporting(E_ALL);
 /**
- * Plugin Name: WP Plugins by Webbased Solutions
+ * Plugin Name: Get It Done Plugins by Webbased Solutions
  * Plugin URI: http://www.webbasedsol.com
- * Description: A contact form that sends contact information to site administrator
- * 				Usage: [gid-reminder]
+ * Description: Reminder form, quote form for Get It Done
  * Author: Korede Folarin
  * Author URI: http://www.webbasedsol.com
  * Version: 0.6.0
