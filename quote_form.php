@@ -115,14 +115,14 @@ function build_quote_message($data){
 		$message .= "RWC: {$data["rwc"]}\n";
 	}
 	else {
-		$message .= "RWC: false";
+		$message .= "RWC: false\n";
 	}
 	
 	if(array_key_exists("hkny", $data)){
 		$message .= "Hackney Permit: {$data["hkny"]}\n";
 	}
 	else {
-		$message .= "Hackney Permit: false";
+		$message .= "Hackney Permit: false\n";
 	}
 	$message .= "Contact Name: {$data["contact_name"]}\n";
 	$message .= "Contact Email: {$data["contact_email"]}\n";

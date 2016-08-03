@@ -1,3 +1,7 @@
+0.6.1 - August 03, 2016
+Updated message panels to use bootstrap alert classes
+Added line break after Hackney permit in email message template
+
 0.6.0 - August 01, 2016
 Updated reminder form to use boostrap
 Updated quote form to use boostrap
