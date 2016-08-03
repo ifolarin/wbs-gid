@@ -37,7 +37,7 @@ function is_mobile($mobile){
 function form_errors($errors=array()){
 	$output = "";
 	if(!empty($errors)){
-		$output = "<div class='notice notice-error is-dismissible'>";
+		$output = "<div class='notice notice-error is-dismissible alert alert-danger' role='alert' >";
 		$output .= "Please fix the following errors:";
 		foreach ($errors as $key => $error){
 			$output .= "<p>{$error}</p>";
@@ -51,7 +51,7 @@ function form_errors($errors=array()){
 function form_message($message){
 	$output = "";
 	if(has_prescence($message)){
-		$output .= "<div class='notice notice-success is-dismissible'>";
+		$output .= "<div class='notice notice-success is-dismissible alert alert-success' role='alert'>";
 		$output .= "<p><strong>{$message}</strong></p>";
 		$output .= "</div>";
 	}
