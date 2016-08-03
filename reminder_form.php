@@ -115,9 +115,10 @@ function build_reminder_form($atts, $form_data, $errors=array()){
 	$output  = "";
 	
 	$output .= render_messages($errors, $atts);
+	$build_contact_section = 'build_contact_section';
 	$form_action = get_permalink();
 	$output .= <<< RENDERFORM
-		<form id='gid-reminder-form'  name='gid-reminder-form' method='post' action="{$form_action}">
+		<form id='gid-reminder-form'  name='gid-reminder-form' class="gid-form" method='post' action="{$form_action}">
 			<fieldset>
 				<h3>{$atts['vehicle_section_title']}</h3>
 				<div class="row">
@@ -168,40 +169,12 @@ function build_reminder_form($atts, $form_data, $errors=array()){
 					</div>					
 				</div>
 			</fieldset>
-			<fieldset>
-				<h3>{$atts['contact_section_title']}</h3>
-				<div class="row">
-					<div class="col-xs-12 col-md-6">
-						<div class="form-group">
-							<label for="contact_name">{$atts['label_contact_name']}</label> <input
-								type="text" class="form-control" id="contact_name"
-								name="contact_name" placeholder="Full Name" value="{$form_data['contact_name']}" required>
-						</div>
-					</div>
-					<div class="col-xs-12 col-md-6">
-						<div class="form-group">
-							<label for="contact_email">{$atts['label_contact_email']}</label> <input
-								type="email" required class="form-control" id="contact_email"
-								name="contact_email" placeholder="Email Address" value="{$form_data['contact_email']}" required>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 col-md-6">
-						<div class="form-group">
-							<label for="contact_mobile">{$atts['label_contact_mobile']}</label> <input
-								type="text" class="form-control" id="contact_mobile"
-								name="contact_mobile" placeholder="Mobile Number" value="{$form_data['contact_mobile']}">
-						</div>
-					</div>
-
-				</div>
-			</fieldset>
+			{$build_contact_section($form_data, $atts)}
 			<div class="row">
-						<div class="col-md-12">
-							<button class="btn btn-default">{$atts['label_submit']}</button>
-						</div>
-					</div>
+				<div class="col-md-12">
+					<button class="btn btn-default">{$atts['label_submit']}</button>
+				</div>
+			</div>
 		</form>
 RENDERFORM;
 	return $output;

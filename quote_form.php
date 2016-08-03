@@ -21,11 +21,14 @@ function gid_quote_sc($atts, $content){
 					"label_mvl_type" => "Vehicle Type",
 					"label_mvi_type" => "Vehicle Insurance Type",
 					"label_rwc" => "Road Worthiness Certificate",
+					"label_hkny" => "Hackney Permit",
 					"label_contact_name" => "Your Full Name",
 					"label_contact_email" => "Your E-mail Address",
 					"label_contact_mobile" => "Your Mobile Number",
 					"label_mvi_value" => "Insured Value",
 					"label_submit" => "Send me a quote",
+					"vehicle_section_title" => "Vehicle Details",
+					"contact_section_title" => "Contact Information",
 					// the error message when at least one of the required fields is empty
 					"error_empty" => 'Please fill in all the required fields.',
 					// the error message when the e-mail address is not valid:
@@ -114,6 +117,13 @@ function build_quote_message($data){
 	else {
 		$message .= "RWC: false";
 	}
+	
+	if(array_key_exists("hkny", $data)){
+		$message .= "Hackney Permit: {$data["hkny"]}\n";
+	}
+	else {
+		$message .= "Hackney Permit: false";
+	}
 	$message .= "Contact Name: {$data["contact_name"]}\n";
 	$message .= "Contact Email: {$data["contact_email"]}\n";
 	$message .= "Contact Mobile: {$data["contact_mobile"]}\n";
@@ -129,6 +139,7 @@ function reset_renewal_quote_form($data){
 	$data["mvi_type"] = "";
 	$data["mvi_value"] = "";
 	$data["rwc"] = "";
+	$data["hkny"] = "";
 	$data["contact_name"] = "";
 	$data["contact_email"] = "";
 	$data["contact_mobile"] = "";
@@ -158,66 +169,97 @@ function build_quote_form($atts, $form_data, $errors=array()){
 	
 	$output .= render_messages($errors, $atts);
 	
-	$output .= "<form id='quote_form' name='quote_form' method='post' action='" . get_permalink(). "'>";
-	$output .= "<fieldset>";
-	$output .= "<legend>Vehicle Details:</legend>";
-	$output .= "<div>";
-	$output .= "	<label for='service_type'>" . esc_attr($atts['label_service_type']) . "</label><span class='required'>*</span>";
-	$output .= "	<select name='service_type' id='service_type' required>";
-	$output .= "		<option value=''>--Select a service--</option>";
-	$output .= "		<option value='vrnwl' " . restore_service_type_state('vrnwl', $form_data['service_type']) . " >Vehicle Document Renewal</option>";
-	$output .= "		<optgroup label='First Registration'>";
-	$output .= "			<option value='vreg01' " . restore_service_type_state('vreg01', $form_data['service_type']). " >Brand New or Imported Used (Tokunbo) Vehicle</option>";
-	$output .= "			<option value='vreg02' " . restore_service_type_state('vreg02', $form_data['service_type']). " >Transfer of License Plate to New or Imported Used (Tokunbo) Vehicle</option>";
-	$output .= "		</optgroup>";
-	$output .= "		<optgroup label='Change of Ownership / Re-Registration'>";
-	$output .= "			<option value='vreg03' " . restore_service_type_state('vreg03', $form_data['service_type']). " >Change of Ownership and Reregistration of previously registered vehicle</option>";
-	$output .= "			<option value='vreg04' " . restore_service_type_state('vreg04', $form_data['service_type']). " >Change of Ownership and transfer of license plate</option>";
-	$output .= "		</optgroup>";
-	$output .= "		<optgroup label='Other'>";
-	$output .= "			<option value='tvt' " . restore_service_type_state('tvt', $form_data['service_type']). " >Temporary Vehicle Tag</option>";
-	$output .= "		</optgroup>";	
-	$output .= "	</select>";
-	$output .= "</div>";
-	$output .= "<div>";
-	$output .= "	<label for='vreg'>" . $atts['label_vreg'] . "</label><span class='required'>*</span>";
-	$output .= "	<input required type='text' name='vreg' id='vreg' class='widefat' value='{$form_data['vreg']}'/>";
-	$output .= "</div>";
-	$output .= "<div>";
-	$output .= "	<label for='vmake'>" . $atts['label_vmake'] . "</label><span class='required'>*</span>";
-	$output .= "	<input required type='text' name='vmake' id='vmake' class='widefat' value='{$form_data['vmake']}'/>";
-	$output .= "</div>";
-	$output .= "<div>";
-	$output .= "	<label for='mvl_type'>" . $atts['label_mvl_type'] . "</label>";
-	$output .= "	<select name='mvl_type' id='mvl_type'>";
-	$output .= build_mvl_opts(get_mvl_types(), $form_data);
-	$output .= "	</select>";
-	$output .= "</div>";
-	$output .= build_mvi_segment($form_data, $atts);
-	$output .= "<div>";
- 	$output .= "	<input type='checkbox' id='rwc' name='rwc' value='true' " . restore_checkbox_state('rwc', $form_data) . " />";
-	$output .= "	<label for='rwc'>" . $atts['label_rwc'] . "</label>";
-	$output .= "</div>";	
-	$output .= "</fieldset>";
-	$output .= "<fieldset>";
-	$output .= "<legend>Contact Details:</legend>";
-	$output .= "<div>";
-	$output .= "	<label for='contact_name'>" . $atts['label_contact_name'] . "</label><span class='required'>*</span>";
-	$output .= "	<input required type='text' name='contact_name' id='contact_name' class='widefat required' placeholder='Full Name' value='{$form_data['contact_name']}' />" ;
-	$output .= "</div>";
-	$output .= "<div>";
-	$output .= "	<label for='contact_email'>" . $atts['label_contact_email'] . "</label><span class='required'>*</span>";
-	$output .= "	<input required type='email' name='contact_email' id='contact_email' class='widefat' placeholder='Email Address' value='{$form_data['contact_email']}'/>";
-	$output .= "</div>";
-	$output .= "<div>";
-	$output .= "	<label for='contact_mobile'>" . $atts['label_contact_mobile'] . "</label>";
-	$output .= "	<input type='text' name='contact_mobile' id='contact_mobile' class='widefat' placeholder='Mobile Number' value='{$form_data['contact_mobile']}'/>";
-	$output .= "</div>";
-	$output .= "</fieldset>";
-	$output .= "<div>";
-	$output .= "	<input type='submit' class='form-submit' value='" . $atts['label_submit'] . "' name='send' id='cf_send' />";
-	$output .= "</div>";
-	$output .= "</form>";
+	$form_action = get_permalink();
+	$service_state = 'restore_service_type_state';
+	$build_mvi_segment = 'build_mvi_segment';
+	$build_mvl_opts = 'build_mvl_opts';
+	$restore_checkbox_state = 'restore_checkbox_state';
+	$build_contact_section = 'build_contact_section';
+
+	$output .= <<< RENDERFORM
+	<form id='gid-quote-form' name='gid-quote-form' class="gid-form" method='post' action='{$form_action}'>
+		<h3>{$atts['vehicle_section_title']}</h3>
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				<div class="form-group">
+					<label for='service_type'>{$atts['label_service_type']}</label><span class='required'>*</span>
+					<select name='service_type' id='service_type' class="form-control" required>
+						<option value=''>--Select a service--</option>
+						<optgroup label='Document Renewal'>
+							<option value='vrnwl' {$service_state('vrnwl', $form_data['service_type'])} >Vehicle Document Renewal</option>
+						</optgroup>
+						<optgroup label='First Registration'>
+							<option value='vreg01' {$service_state('vreg01', $form_data['service_type'])} >Brand New or Imported Used (Tokunbo) Vehicle</option>
+							<option value='vreg02' {$service_state('vreg02', $form_data['service_type'])}>Transfer of License Plate to New or Imported Used (Tokunbo) Vehicle</option>
+						</optgroup>
+						<optgroup label='Change of Ownership / Re-Registration'>
+							<option value='vreg03' {$service_state('vreg03', $form_data['service_type'])}>Change of Ownership and Reregistration of previously registered vehicle</option>
+							<option value='vreg04' {$service_state('vreg04', $form_data['service_type'])}>Change of Ownership and transfer of license plate</option>
+						</optgroup>
+						<optgroup label='Other'>
+							<option value='tvt' {$service_state('tvt', $form_data['service_type'])}>Temporary Vehicle Tag</option>
+						</optgroup>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<div class="form-group">
+					<label for="vreg"> {$atts['label_vreg']} </label> <input
+						type="text" class="form-control" id="vreg" name="vreg"
+						placeholder="Vehicle Registration Number" value="{$form_data['vreg']}">
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6">
+				<div class="form-group">
+					<label for="vmake">{$atts['label_vmake']}</label> <input
+						type="text" class="form-control" id="vmake" name="vmake"
+						placeholder="Vehicle Make & Model e.g Toyota Corolla" value="{$form_data['vmake']}">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<div class="form-group">
+					<label for='mvl_type'>{$atts['label_mvl_type']}</label>
+					<select name='mvl_type' id='mvl_type' class="form-control">				
+						{$build_mvl_opts(get_mvl_types(), $form_data)}
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6">
+					{$build_mvi_segment($form_data, $atts)}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+						  <input type="checkbox" id='rwc' name='rwc' value='true' {$restore_checkbox_state('rwc', $form_data)} > {$atts['label_rwc']}
+						</label>
+					  </div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6">
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+						  <input type="checkbox" id='hkny' name='hkny' value='true' {$restore_checkbox_state('hkny', $form_data)} > {$atts['label_hkny']}
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>	
+		{$build_contact_section($form_data, $atts)}
+		<div class="row">
+			<div class="col-md-12">
+				<button class="btn btn-default">{$atts['label_submit']}</button>
+			</div>
+		</div>
+	</form>
+RENDERFORM;
 	
 	return $output;
 }

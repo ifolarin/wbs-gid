@@ -3,7 +3,7 @@
 require_once 'functions.php';
 require_once 'validation_functions.php';
 require_once 'email_functions.php';
-require_once 'contact_form_functions.php';
+// require_once 'contact_form_functions.php';
 require_once 'mvi_functions.php';
 
 function gid_vreg_sc($atts, $content){

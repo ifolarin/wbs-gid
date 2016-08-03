@@ -1,5 +1,6 @@
 0.6.0 - August 01, 2016
 Updated reminder form to use boostrap
+Updated quote form to use boostrap
 
 0.5.0 - Juy 25, 2016
 Implemented datepicker for date fields on Reminder

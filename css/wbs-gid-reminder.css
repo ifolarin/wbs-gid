@@ -9,14 +9,13 @@ Secondary Color: rgb(81, 183, 172);
 Secondary Color: #51b7ac;
 */
 
-#gid-reminder-form input.form-control {
+.gid-form input.form-control, .gid-form select.form-control, .gid-form .input-group-addon  {
 	-webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
   -ms-transition: all 0.30s ease-in-out;
   -o-transition: all 0.30s ease-in-out;
   outline: none;
   padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
 	border: 1px solid #51b7ac;
 	
 	font-family: 'Roboto', sans-serif;
@@ -29,23 +28,28 @@ border-radius: 2px; /* future proofing */
 -khtml-border-radius: 2px; /* for old Konqueror browsers */
 }
 
-#gid-reminder-form input.form-control:focus{
+.gid-form input.form-control:focus, .gid-form select.form-control:focus{
   box-shadow: 0 0 5px rgba(35, 147, 111, 1);
   padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
   border: 1px solid rgba(35, 147, 111, 1);
   background-color: #ffffff;
 }
 
+.gid-form .input-group-addon {
+	background-color: #23936f;
+	border: 1px solid #23936f;
+	padding: 0 5px;
+	color: #ffffff;
+}
 
-#gid-reminder-form .form-group label{
+.gid-form .form-group label{
 	font-weight: bold;
 	color: #23936f;
 	font-family: 'Roboto', sans-serif;
 	font-size: 1em;
 }
 
-#gid-reminder-form h3{
+.gid-form h3{
 	color: #23936f;
 	font-family: 'Roboto', sans-serif;
 	font-size: 1.5em !important;
@@ -54,12 +58,12 @@ border-radius: 2px; /* future proofing */
 	
 }
 
-#gid-reminder-form h3:first-of-type{
+.gid-form h3:first-of-type{
 	margin-top: 1em;
 	
 }
 
-#gid-reminder-form .btn, #gid-reminder-form .btn-default{
+.gid-form .btn, .gid-form .btn-default{
 	background-color: #23936f;
 	color: #ffffff;
 	border: 1px solid #23936f;	
@@ -67,7 +71,7 @@ border-radius: 2px; /* future proofing */
 	height: 3em;
 }
 
-#gid-reminder-form .btn:hover, #gid-reminder-form .btn-default:hover{
+.gid-form .btn:hover, .gid-form .btn-default:hover{
 	background-color: #51b7ac;
 	color: #000000;
 	border: 1px solid #51b7ac;
