@@ -34,7 +34,7 @@ function gid_quote_sc($atts, $content){
 					// the error message when the e-mail address is not valid:
 					"error_noemail" => "Please enter a valid e-mail address.",
 					// the success message when the email is sent:
-					"success_message" => "Your vehicle details have been recorded and we will remind you before renewal is due",
+					"success_message" => "Your request has been received and a quote will be sent out to you shortly.",
 					"message_not_sent" => "Oops there was an error sending your message. This issue has been reported.",
 					"min_mvi_value" => 500000,
 			), $atts
