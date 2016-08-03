@@ -54,7 +54,7 @@ function gid_quote_sc($atts, $content){
 		if(empty($errors)){
 			$resp = send_email(
 						$atts["email"], 
-						"Renewal Quote for " . $renewal_data["vreg"] , 
+						"Service Quote Request -  " . $renewal_data["service_type"] , 
 						build_quote_message($renewal_data), 
 						build_email_headers($renewal_data["contact_email"], $renewal_data["contact_name"]));
 			
@@ -104,6 +104,7 @@ function build_quote_message($data){
 	
 	$message = "";
 	
+	$message .= "Service Type: {$data["service_type"]}\n";
 	$message .= "Registration Number: {$data["vreg"]}\n";
 	$message .= "Vehicle Make: {$data["vmake"]}\n";
 	$message .= "Vehicle Type: {$data["mvl_type"]}\n";
