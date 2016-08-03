@@ -9,7 +9,7 @@ Secondary Color: rgb(81, 183, 172);
 Secondary Color: #51b7ac;
 */
 
-.gid-form input.form-control, .gid-form select.form-control, .gid-form .input-group-addon  {
+.gid-form input.form-control, .gid-form select.form-control, .gid-form textarea, .gid-form .input-group-addon  {
 	-webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
   -ms-transition: all 0.30s ease-in-out;
@@ -28,7 +28,11 @@ border-radius: 2px; /* future proofing */
 -khtml-border-radius: 2px; /* for old Konqueror browsers */
 }
 
-.gid-form input.form-control:focus, .gid-form select.form-control:focus{
+ .gid-form textarea{
+ 	height: auto;
+ }
+
+.gid-form input.form-control:focus, .gid-form select.form-control:focus, .gid-form textarea:focus{
   box-shadow: 0 0 5px rgba(35, 147, 111, 1);
   padding: 3px 0px 3px 3px;
   border: 1px solid rgba(35, 147, 111, 1);

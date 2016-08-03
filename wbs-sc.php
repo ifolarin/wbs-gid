@@ -6,7 +6,7 @@ error_reporting(E_ALL);
  * Description: Reminder form, quote form for Get It Done
  * Author: Korede Folarin
  * Author URI: http://www.webbasedsol.com
- * Version: 0.6.0
+ * Version: 0.6.1
  * License: GPLv2
  */
 

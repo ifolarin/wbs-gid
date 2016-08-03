@@ -18,13 +18,14 @@ function wbs_contact_sc($atts, $content){
 					"label_contact_email" => "Your E-mail Address",
 					"label_subject" => "Subject",
 					"label_message" => "Your Message",
-					"label_submit" => "Send",
+					"label_submit" => "Send Message",
 					// the error message when at least one of the required fields is empty
 					"error_empty" => 'Please fill in all the required fields.',
 					// the error message when the e-mail address is not valid:
 					"error_noemail" => "Please enter a valid e-mail address.",
 					// the success message when the email is sent:
-					"success_message" => "Thank you for your email! Someone from our team will respond as soon as we can",
+					"success_message" => "Thank you for your message.<br />A member of our team will get in touch with you shortly",
+					"form_style" => "default",
 			), $atts
 			);
 	
@@ -87,29 +88,98 @@ function wbs_build_contact_us_form($atts, $form_data, $errors=array()){
 	$output = "";
 	
 	$output .= render_messages($errors, $atts);	
-
-	$output .= "<form id='wbs-contact-form' class='contact-form' method='post' action='" . get_permalink(). "'>";
-	$output .= "<div class='wbs-contact-row-name'>";
-	$output .= "	<label for='wbs-contact-name'>" . $atts['label_contact_name'] . "</label>";
-	$output .= "	<input placeholder='Name' required type='text' name='contact_name' id='wbs-contact-name' class='wbs-contact required' value='{$form_data['contact_name']}' />" ;
-	$output .= "</div>";
-	$output .= "<div class='wbs-contact-row-email'>";
-	$output .= "	<label for='wbs-contact-email'>" . $atts['label_contact_email'] . "</label>";
-	$output .= "	<input placeholder='Email' required type='text' name='contact_email' id='wbs-contact-email' class='wbs-contact' value='{$form_data['contact_email']}'/>";
-	$output .= "</div>";
-	$output .= "<div class='wbs-contact-row-subject'>";
-	$output .= "	<label for='wbs-contact-subject'>" . $atts['label_subject'] . "</label>";
-	$output .= "	<input placeholder='Subject' required type='text' name='subject' id='wbs-contact-subject' class='wbs-contact' value='{$form_data['subject']}'/>";
-	$output .= "</div>";
-	$output .= "<div class='wbs-contact-row-message'>";
-	$output .= "	<label for='wbs-contact-message'>" . $atts['label_message'] . "</label>";
-	$output .= "	<textarea placeholder='Message' required name='message' id='wbs-contact-message' class='wbs-contact' rows='15'>{$form_data['message']}</textarea>";
-	$output .= "</div>";
-	$output .= "<div class='wbs-contact-row-btn'>";
-	$output .= "	<button type='submit' class='wbs-contact-btn'>" . $atts['label_submit'] . "</button>";
-	$output .= "</div>";
-	$output .= "</form>";
-
+	$form_action = get_permalink();
+	
+	if (strtolower($atts["form_style"]) === "horizontal")
+	{
+		$output .= <<< RENDERHORIZONTAL
+	<fieldset>
+<form id='wbs-contact-form' class='gid-form form-horizontal' method='post' action="{$form_action}">
+	<div class="form-group">
+		<label for="contact_name" class="col-sm-3 control-label">{$atts['label_contact_name']}</label>
+		<div class="col-sm-9"><input type="text" class="form-control" id="contact_name"
+			name="contact_name" placeholder="Your Full Name" value="{$form_data['contact_name']}" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="contact_email" class="col-sm-3 control-label">{$atts['label_contact_email']}</label>
+		<div class="col-sm-9"><input
+			type="email" required class="form-control" id="contact_email"
+			name="contact_email" placeholder="Your Email Address" value="{$form_data['contact_email']}" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="subject"  class="col-sm-3 control-label">{$atts['label_subject']}</label>
+		<div class="col-sm-9"><input
+			type="text" class="form-control" id="subject"
+			name="subject" placeholder="Subject" value="{$form_data['subject']}" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="message" class="col-sm-3 control-label">{$atts['label_message']}</label>
+		<div class="col-sm-9"><textarea
+			type="text" class="form-control" id="message"
+			name="message" placeholder="Your message..." value="{$form_data['message']}" required rows="10"></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-9">
+			<button class="btn btn-default">{$atts['label_submit']}</button>
+		</div>
+	</div>
+</form>
+</fieldset>
+RENDERHORIZONTAL;
+	}else{
+		$output .= <<< RENDERDEFAULT
+	<fieldset>
+	<form id='wbs-contact-form' class='gid-form' method='post' action="{$form_action}">
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+				<div class="form-group">
+					<label for="contact_name">{$atts['label_contact_name']}</label> <input
+						type="text" class="form-control" id="contact_name"
+						name="contact_name" placeholder="Your Full Name" value="{$form_data['contact_name']}" required>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+				<div class="form-group">
+					<label for="contact_email">{$atts['label_contact_email']}</label> <input
+						type="email" required class="form-control" id="contact_email"
+						name="contact_email" placeholder="Your Email Address" value="{$form_data['contact_email']}" required>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+				<div class="form-group">
+					<label for="subject">{$atts['label_subject']}</label> <input
+						type="text" class="form-control" id="subject"
+						name="subject" placeholder="Subject" value="{$form_data['subject']}" required>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+				<div class="form-group">
+					<label for="message">{$atts['label_message']}</label> <textarea
+						type="text" class="form-control" id="message"
+						name="message" placeholder="Your message..." value="{$form_data['message']}" required rows="10"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<button class="btn btn-default">{$atts['label_submit']}</button>
+			</div>
+		</div>
+	</form>
+</fieldset>
+RENDERDEFAULT;
+		
+	}
 	return $output;
 
 }

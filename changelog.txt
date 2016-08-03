@@ -4,6 +4,9 @@ Added line break after Hackney permit in email message template
 Corrected service quote request success message
 Updated service quote email subject
 Added selected service type to quote email message
+Used bootstrap classes for contact form
+Added bootstrap horizontal contact form template
+Added form_style attribute to select between default boostrap form layout and horizontal form layout
 
 0.6.0 - August 01, 2016
 Updated reminder form to use boostrap
