@@ -42,7 +42,7 @@ function validate_mvi_type($form_data, $atts){
 
 function build_mvi_options($form_data){
 	$mvi_types = array(
-			"" => "",
+			"" => "--Select Insurance Type--",
 			"mvi01" => "Third Party Insurance",
 			"mvi02" => "Comprehensive Insurance",
 	);
